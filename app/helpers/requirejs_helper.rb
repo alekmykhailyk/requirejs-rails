@@ -39,7 +39,6 @@ module RequirejsHelper
           run_config[:priority].concat _priority
         end
         if Rails.application.config.assets.digest
-          run_config.delete "baseUrl"
           modules = requirejs.build_config['modules'].map { |m| requirejs.module_name_for m }
 
           # Generate digestified paths from the modules spec
