@@ -29,6 +29,7 @@ module Requirejs::Rails
       self.user_config = {}
 
       self.run_config_whitelist = %w{
+        hbs
         baseUrl
         callback
         catchError
@@ -48,6 +49,7 @@ module Requirejs::Rails
       }
 
       self.build_config_whitelist = %w{
+        hbs
         appDir
         baseUrl
         closure
