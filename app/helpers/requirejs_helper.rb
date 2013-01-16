@@ -20,16 +20,18 @@ module RequirejsHelper
     end.join(" ")
   end
   
-  def requirejs_config(requirejs_config)
-    unless requirejs_config.run_config.empty?
-      run_config = requirejs_config.run_config.dup
+  def requirejs_config
+    requirejs = Rails.application.config.requirejs
+
+    unless requirejs.run_config.empty?
+      run_config = requirejs.run_config.dup
       unless _priority.empty?
         run_config = run_config.dup
         run_config[:priority] ||= []
         run_config[:priority].concat _priority
       end
       if Rails.application.config.assets.digest
-        modules = requirejs_config.build_config['modules'].map { |m| requirejs_config.module_name_for m }
+        modules = requirejs.build_config['modules'].map { |m| requirejs.module_name_for m }
 
         # Generate digestified paths from the modules spec
         paths = {}
