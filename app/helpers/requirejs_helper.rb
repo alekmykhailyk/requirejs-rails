@@ -20,7 +20,10 @@ module RequirejsHelper
     end.join(" ")
   end
   
-  def requirejs_config
+  def requirejs_config(inline_config = {})
+     
+
+    run_config = {}
     requirejs = Rails.application.config.requirejs
 
     unless requirejs.run_config.empty?
@@ -46,6 +49,9 @@ module RequirejsHelper
         # and in the build_config.
         run_config['paths'] = paths
       end
+    end
+    run_config.merge! inline_config unless inline_config.empty?
+    unless run_config.empty?
       "<script>var require = #{run_config.to_json};</script>".html_safe
     end
   end
